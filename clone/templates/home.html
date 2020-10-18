@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block styles %}
+{{block.super}}
+{% endblock%}
+
+{% block content%}
+<br><br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+       {% for image in all_images %}
+        <div class="card">
+            <div class="card-header">
+              <span>{{image.user}}</span>
+            </div>
+            <div class="card-">
+              <div class="">
+                <a href="/image/comment/{{image.id}}">
+                <img class="img-fluid" src="{{image.image.url}}" alt="" width="300px" height="350px"></a>
+              </div>
+
+            </div>
+            <div class="card-footer">
+                <div>
+                  <p>{{image.image_caption}}</p>
+                    <i class="far fa-heart"></i>
+                    <a href="/comment/{{image.id}}"><i class="far fa-comment"></i></a>
+                </div>
+              <div>
+                <i>{{image.likes}} likes</i>
+              </div>
+              <div>
+                <i>{{image.post_date}} </i>
+                </div>
+            </div>
+            <div class="card-body ">
+                {% for comment in comments %}
+                {% if comment.image == image.id%}
+                <h5><strong>{{comment.comment_user}}</strong> {{comment.comment}}</h5>
+                <hr>
+
+                {% endif %}
+                {% endfor %}
+            </div>
+
+
+
+          </div>
+          <br><br>
+        {% endfor %}
+{% endblock%}

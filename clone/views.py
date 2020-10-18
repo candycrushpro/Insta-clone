@@ -1,29 +1,18 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth import authenticate,login
-from .forms import LoginForm
+from django.shortcuts import render,redirect
+import datetime as dt
+from django.contrib.auth.decorators import login_required
+# from .models import Image, Profile,Comments,Likes
+# from .forms import NewComment,NewImage,UpdateProfile
+from django.contrib.auth.models import User
+from django.http import Http404,HttpResponse,HttpResponseRedirect
 
-# Create your views here.
-
-def user_login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.Post)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(request, username=cd['username'],password=cd['password'])
-
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponse('Authenticated'\
-                                        'succesfully')
-                else:
-                    return HttpResponse('Disabled account')
-
-            else:
-                return HttpResponse('Invalid login')
-
-    else:
-        return render(request,'clone/login.html',{'form':form})                    
-
+@login_required(login_url='/accounts/login')
+def homepage (request):
+    current_user = request.user
+    all_images = Image.objects.all()
+    comments = Comments.objects.all()
+    likes = Likes.objects.all()
+    profile = Profile.objects.all()
+    print(likes)
+    return render(request,'home.html',locals())
 

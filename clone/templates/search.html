@@ -1,0 +1,31 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+<div class="container ">
+    <div class="row">
+        {% if results %}
+            {% for result in results %}
+            <div class="row">
+                {% if result.profile_pic %}
+                <img src="{{result.profile_pic.cdn_url}}" class="img-circle" alt="image">
+                {% else %}
+                <img src="/static/img/avi.png" alt="avatar">
+                {% endif %}
+            </div>
+      <br>
+                <ul style="list-style: none">
+                  <li class="owner">{{result.profile.user}} </li>
+                  <li style="list-style: none"><a class="btn btn-primary" href="profile/profile.html">discover</a></li>
+                  
+
+                </ul>
+            {% endfor %}
+        {% else %}
+            <div class="col-md-12 text-center">
+                <h4 class="font1">Not found </h4>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

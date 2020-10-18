@@ -16,3 +16,15 @@ def homepage (request):
     print(likes)
     return render(request,'home.html',locals())
 
+@login_required(login_url='/accounts/login')
+def profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = UpdateProfile(request.POST,request.FILES)
+        if form.is_valid():
+             profile = form.save(commit=False)
+             profile.user = current_user
+             profile.save()
+        else:
+            form=UpdateProfile()
+    return render(request, 'profile/new.html',locals())

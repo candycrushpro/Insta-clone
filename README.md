@@ -33,4 +33,6 @@
 * Run this command to open the app
   $ python3.7 manage.py runserver
 
-  
+# License
+* MIT License
+* Copyright (c) 2020 Dan Bradley Otieno

@@ -56,3 +56,14 @@ def showprofile(request,username):
      images = Image.profile_images(profile.id)
      print(images)
      return render(request, 'profile/profile.html', {'profile':profile, 'profile_details':profile_details, 'images':images})    
+
+def search(request):
+    profiles = User.objects.all()
+
+    if 'username' in request.GET and request.GET['username']:
+        search_term = request.GET.get('username')
+        results = User.objects.filter(username__icontains=search_term)
+        print(results)
+
+        return render(request,'search.html',locals())
+    return redirect('homePage')

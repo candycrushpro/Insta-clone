@@ -73,21 +73,21 @@ class Image(models.Model):
           return images
 
 
-class Comments(models.Model):
-    comment=models.TextField(max_length=50)
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
-    image=models.ForeignKey(Image,blank=True)
-    def __str__(self):
-        return self.comment
+# class Comments(models.Model):
+#     comment=models.TextField(max_length=50)
+#     user=models.ForeignKey(User,on_delete=models.CASCADE)
+#     image=models.ForeignKey(Image,blank=True)
+#     def __str__(self):
+#         return self.comment
     
-    def save_comments(self):
-        self.save()
+#     def save_comments(self):
+#         self.save()
 
     
-    def delete_comment(self):
-        self.delete()
+#     def delete_comment(self):
+#         self.delete()
 
-    @classmethod
-    def get_image_comments(cls, id):
-        comments = Comment.objects.filter(image__pk=id)
-        return comments
+#     @classmethod
+#     def get_image_comments(cls, id):
+#         comments = Comment.objects.filter(image__pk=id)
+#         return comments

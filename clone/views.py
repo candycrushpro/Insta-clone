@@ -67,3 +67,26 @@ def search(request):
 
         return render(request,'search.html',locals())
     return redirect('homePage')
+
+def comment(request,image_id):
+    current_user=request.user
+    image = Image.objects.get(id=image_id)
+    profile_user = User.objects.get(username=current_user)
+    comments = Comments.objects.all()
+    print(comments)
+    if request.method == 'POST':
+        form = NewComment(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.image = image
+            comment.comment_user = current_user
+            comment.save()
+
+            print(comments)
+
+
+        return redirect('homePage')
+    else:
+        form = NewComment()
+
+    return render(request, 'comment.html', locals())

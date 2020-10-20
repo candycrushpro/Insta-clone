@@ -1,0 +1,91 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content %}
+{{block.super}}
+
+
+<header>
+
+    <div class="container">
+  
+      <div class="profile">
+        {% if profile_details.profile_pic %}
+        <div class="profile-image">{{profile_details.profile_pic.cdn_url}}</div>
+        {% else %}
+        <img class="img-rounded" src=" {% static 'img/avi.jpeg' %}">
+        {% endif %}
+  
+        <div class="profile-user-settings">
+  
+          <h1 class="profile-user-name">{{ profile_details.owner }}</h1>
+  
+          <button class="btn profile-edit-btn">Edit Profile</button>
+  
+          <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+  
+        </div>
+  
+        <div class="profile-stats">
+  
+          <ul>
+            <li><span class="profile-stat-count">164</span> posts</li>
+            <li><span class="profile-stat-count">188</span> followers</li>
+            <li><span class="profile-stat-count">206</span> following</li>
+          </ul>
+  
+        </div>
+  
+        <div class="profile-bio">
+
+          <p>{{profile_details.bio}}</p>
+          {% if profile.owner == user.id %}
+          <p><a href= "{% url 'upload_image' %}">Add Image</a></p>
+          {% endif %}
+        </div>
+  
+      </div>
+    
+  
+    </div>
+   
+  </header>
+  
+  <main>
+  
+    <div class="container">
+  
+      <div class="gallery">
+  
+        <div class="gallery-item" tabindex="0">
+  
+          <img src="{{image.pic.cdn_url}}" class="gallery-image" alt="">
+  
+          <div class="gallery-item-info">
+  
+            <ul>
+              <li class="gallery-item-likes"><span class="visually-hidden">Likes" {% url 'like' image_id=image.id %}"</span><i class="fas fa-heart" aria-hidden="true"></i></li>
+              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span>
+                <a href=" {% url 'comment' image_id=image.id %}">
+                <i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+            </ul>
+  
+          </div>
+          <div class="card-body text-center">
+              {% for comment in comments %}
+              {% if comment.image_id == image.id%}
+              <p class=""> {{comments.image_id|length}} comments </p>
+              <small>{{comment.comment_owner}}</small>
+              <p>{{comment.comment}}</p>
+              <hr>
+
+              {% endif %}
+              {% endfor %}
+
+        </div>
+      </div>
+  
+      <div class="loader"></div>
+  
+    </div>
+  </main>
+  {% endblock%}

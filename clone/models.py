@@ -37,6 +37,7 @@ class Profile(models.Model):
     def get_profile_by_username(cls, owner):
         profiles = cls.objects.filter(owner__contains=owner)
         return profiles
+        
 class Image(models.Model):
       image = models.ImageField(upload_to='images/')
       name = models.CharField(max_length =30)

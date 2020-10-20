@@ -1,5 +1,5 @@
 from django import forms
-# from .models import Profile,Image,Comments
+from .models import Profile,Image,Comments
 from django.forms import ModelForm,Textarea
 
 class NewImage(forms.ModelForm):

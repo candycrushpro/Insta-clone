@@ -24,7 +24,7 @@
 
 # Project setup instruction/ installations
 
-* From the repository, click + in the global sidebar and select Clone this repository .
+* From the repository, click + in the global sidebar and select import repository .
 
 * Copy the clone command.
 

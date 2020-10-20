@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('',include('clone.urls')),
+    path('admin/', admin.site.urls),
+    # path('accounts/',include('django.contrib.auth.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('tinymce/',include('tinymce.urls')),
+    # path('logout/',views.logout,{"next_page":'/'}),
 ]

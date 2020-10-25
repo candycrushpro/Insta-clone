@@ -1,62 +1,42 @@
-{%extends "registration/base.html"%} 
-{% load bootstrap4 %} 
-{% load static %} 
+{%extends "registration/base.html"%}
+{% load bootstrap3 %}
 {% block content %}
-<div class="container" style="background-color:#fff;">
+<div class="container">
   <div class="row">
-
-    <div class="col-md-6  mt-5">
-      <img src="https://miro.medium.com/max/1062/0*6V0TKYKHWq-D10M5." alt="" class="img-fluid" height="450">
-
-    </div>
-    <div class="col-md-6">
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
       {% if form.errors %}
-      <p> Some Information Might be Incorrect </p>
+        <p> Password or Username is incorrect </p>
       {% endif %}
-      <div class="card border-primary mb-4">
-      
-        <div class="card-header text-center">
-          <img src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-instagram-new-circle-512.png" alt="" height="100px" width="100px">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/640px-Instagram_logo.svg.png" alt="" height="100px" width="150px">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="text-center">Sign In</h3>
         </div>
-        <div class="card-body text-primary">
-          <form action="/accounts/login/" method="post">
-            {% csrf_token %} {% bootstrap_form form%}
-      
+        <div class="panel-body">
+
+          <form  action="/accounts/login/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form%}
+
             <div class="form-group">
-              <input type="submit" class="btn btn-dark" value="Login">
+              <input type="submit" class="btn btn-primary btn-sm" value="Login">
             </div>
-      
+
             <input type="hidden" name="next" value="{{next}}">
-      
+
           </form>
+          <a href="/accounts/register">Register</a>
+
         </div>
+
       </div>
-        <div class="card mt-5" >
-            <div class="card-body text-center">
-              <h5 class="card-title">Don't have an account?</h5>
-              <a href="/accounts/register" class="btn btn-dark">Sign Up</a>
-            </div>
-          </div>
-          <div class="card mt-5">
-              <div class="card-body text-center">
-                <h5 class="card-title">Get the app.</h5>
-                <a href="https://itunes.apple.com/ke/app/instagram/id389801252?mt=8"><img src="https://cdn.worldvectorlogo.com/logos/download-on-the-app-store-apple.svg"
-                    style="height:70px;width:200px;"></a>
-                <a href="https://play.google.com/store?hl=en"><img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/123405905/original/bb8cca0d1d7d12de98740e54b807b64f6693942b/upload-your-android-applications-on-playstore.png" style="height:70px;width:200px;"></a>
-              </div>
-      
-            </div>
+
     </div>
-
+    <!-- empty div -->
+    <div class="col-md-4"></div>
   </div>
-
-</div>
-
-<br>
-<br>
-
-
 </div>
 
 {% endblock %}

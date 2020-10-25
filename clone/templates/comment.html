@@ -1,17 +1,27 @@
-{% extends 'registration/base.html' %}
-{% load bootstrap4 %}
+{% extends 'base.html'%}
+ {% load static%}
+ {% load bootstrap3 %} 
+ {% block content %} 
+ {{block.super}}
 
-{% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <form action=" {% url 'comment' image_id=image.id %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                <input type="submit" class="btn btn-success btn-lg" value="POST">
-            </form>
-        </div>
+<div class="container" ">
+<div class="col-md-3" ></div>
+<div class="col-md-1 ">
+    <h4 style="font-weight:bolder;">Comments</h4>
+    {% for comment in pic.comments%}
+    <h5><span style="font-weight:bolder;">{{comment.user_id}}:</span >  {{comment}} </h5> 
+    {% endfor %}
     </div>
+
+<div class="col-md-3">
+    <form style="margin-top: 100px;" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form%}
+    <input type="submit" class="btn btn-primary btn-sm" value="Submit">
+    <input type="hidden" name="next" value="{{next}}">
+    </form>
+    <p><a href="{% url 'timeline' %}"> previous</a></p>
 </div>
-{{ form.media }}
+</div>
 {% endblock %}
+

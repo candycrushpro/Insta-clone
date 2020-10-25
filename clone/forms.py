@@ -1,17 +1,23 @@
 from django import forms
-from .models import Profile,Image,Comments
-from django.forms import ModelForm,Textarea
+from .models import Comment,Profile,Pic
+from django.contrib.auth.forms import AuthenticationForm
 
-class NewImage(forms.ModelForm):
-    class Meta:
-        model = Image
-        exclude = ['post_date','user','likes']
+class ProfileForm(forms.ModelForm):
+	model = Profile
+	username = forms.CharField(label='Username',max_length = 30)
+	
+	bio = forms.CharField(label='Image Caption',max_length=500)
+	profile_pic = forms.ImageField(label = 'Image Field')
 
-class UpdateProfile(forms.ModelForm):
-     class Meta:
-         model = Profile
-         exclude =['userId']
-class NewComment(forms.ModelForm):
-    class Meta:
-        model=Comments
-        exclude=['user','images']
+
+class ProfileUploadForm(forms.ModelForm):
+	class Meta:
+		model = Profile
+		
+		exclude = ['user']
+
+class CommentForm(forms.ModelForm):
+	class Meta:
+		model = Comment
+		
+		exclude = ['user','pic',]

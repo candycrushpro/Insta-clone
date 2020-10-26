@@ -18,7 +18,7 @@ from pathlib import Path
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))
 
-MODE=config("MODE", default="dev")
+MODE = config("MODE", default="dev")
 
 SECRET_KEY = config('SECRET_KEY')
 

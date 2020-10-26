@@ -8,6 +8,7 @@
 
 * Python 3.7.5
 * Django 3.1.2
+* HTML
 
 # Application requirements
 * Ensure you have Python3.7 installed in your computer. you can download it by running this command:
